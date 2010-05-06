@@ -1,25 +1,31 @@
-== Devise Example
+== Devise CAS Example
 
-Example App using devise. http://github.com/plataformatec/devise
+An example of how to use CAS authentication in a Devise app.  Forked from
+the original devise_cas_example app and modified as little as possible.
 
 == Installation
 
-Install warden and devise gems if you don't have them installed:
+Set up a CAS server if you don't already have one.  JA-SIG's official CAS
+server is very robust but tricky to configure unless you're very familiar
+with J2EE apps.  rubycas-server is possibly more familiar for Rubyists,
+but is less conformant with the CAS specification.
 
-  sudo gem install warden devise
+Edit config/initializers/devise.rb to set the URL of your CAS server:
 
-Rake devise setup task:
+  config.cas_base_url = "http://your-cas-server-here"
 
-  rake devise:setup
+Install the required gems:
 
-This will:
+  sudo gem install warden devise 
+  sudo gem install --pre devise_cas_authenticatable
 
-* drop any existing database
-* create a new database
-* migrate the database
-* create a default user and admin
+Migrate your database:
 
-Run the server and use the credentials provided by the rake task to sign in and test the application.
+  rake db:migrate
+
+(Running rake devise:setup might work too; I haven't tested that.  I suspect
+it may do some weirdness because it tries to create default users, which may
+not work with your CAS setup.)
 
 The example is using "rails-footnotes":http://github.com/josevalim/rails-footnotes gem. If you don't have it installed, run the following command to install the gem:
 
@@ -29,4 +35,5 @@ If you don't want to install this gem, just comment the line in the environment.
 
 == License
 
-MIT License. Copyright 2009 Plataforma Tecnologia. http://blog.plataformatec.com.br
+MIT License.  Copyright 2010 Nat Budin.  natbudin@gmail.com
+Based on code that is Copyright 2009 Plataforma Tecnologia. http://blog.plataformatec.com.br
