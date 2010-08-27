@@ -7,7 +7,8 @@ RAILS_GEM_VERSION = '2.3.5' unless defined? RAILS_GEM_VERSION
 require File.join(File.dirname(__FILE__), 'boot')
 
 Rails::Initializer.run do |config|
-  config.gem 'devise_cas_authenticatable', :version => '1.0.0.alpha2'
+  config.gem 'devise', :version => '~> 1.0.6'
+  config.gem 'devise_cas_authenticatable', :version => '1.0.0.alpha3'
   config.gem 'rails-footnotes', :version => '3.6.5'
 
   config.time_zone = 'UTC'
